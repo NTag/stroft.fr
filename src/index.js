@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFacebook, faYoutube, faSoundcloud } from '@fortawesome/free-brands-svg-icons';
-library.add(faFacebook, faYoutube, faSoundcloud);
+import { faFacebook, faYoutube, faSoundcloud, faInstagram } from '@fortawesome/free-brands-svg-icons';
+library.add(faFacebook, faYoutube, faSoundcloud, faInstagram);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

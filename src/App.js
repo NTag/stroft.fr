@@ -108,6 +108,9 @@ export default () => {
         <Link target="_blank" rel="noopener noreferer" title="Chaîne YouTube de Stroft" href="https://www.youtube.com/channel/UCX4ii_HniVkC-hDf7GtQabg">
           <FontAwesomeIcon icon={['fab', 'youtube']} />
         </Link>
+        <Link target="_blank" rel="noopener noreferer" title="Instagram de Stroft" href="https://instagram.com/stroftofficiel">
+          <FontAwesomeIcon icon={['fab', 'instagram']} />
+        </Link>
         <Link target="_blank" rel="noopener noreferer" title="Page Facebook de Stroft" href="https://www.facebook.com/stroftofficiel/">
           <FontAwesomeIcon icon={['fab', 'facebook']} />
         </Link>
