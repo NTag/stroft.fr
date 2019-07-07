@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
-import video from './stroft.mp4';
+import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import cover from './cover.jpg';
 
 const Container = styled.div`
   display: flex;
@@ -9,21 +9,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  cursor: ${props => props.displayMouse ? 'pointer' : 'none'};
-`;
-const VideoContainer = styled.div`
-  overflow: hidden;
-  max-width: 100%;
-  text-align: center;
-  width: calc(100vh - 6rem - 3em - 9rem);
-  margin-top: 9rem;
 `;
 const LinksContainer = styled.div`
-  opacity: ${props => props.displayit ? '1' : '0'};
-  transition: opacity 0.3s;
-  cursor: default;
   padding: 3rem 10rem;
   height: 3rem;
+  text-align: center;
 
   @media (max-width: 800px) {
     padding: 3rem 0rem;
@@ -42,68 +32,25 @@ const Link = styled.a`
     color: rgba(10, 10, 10);
   }
 `;
-
-const isTouchDevice = () => {
-  const prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
-  const mq = function(query) {
-    return window.matchMedia(query).matches;
-  }
-
-  if (('ontouchstart' in window) || (window.DocumentTouch && document instanceof window.DocumentTouch)) {
-    return true;
-  }
-
-  const query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('');
-  return mq(query);
-};
-
-const touchDevice = isTouchDevice();
-
-const videoStyle = { display: 'inline-block', position: 'relative', top: -1, right: -2, maxHeight: '100%', maxWidth: '100%' };
+const Title = styled.h3`
+  text-align: center;
+  height: 0px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  top: -50px;
+`;
 
 export default () => {
-  const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [mousePosition, setMousePosition] = useState(null);
-  const [displayLinks, setDisplayLinks] = useState(touchDevice);
-  const [mouseOverLinks, setMouseOverLinks] = useState(false);
-
-  const onClick = useCallback(() => {
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  });
-
-  useEffect(() => {
-    if (mousePosition) {
-      setDisplayLinks(true);
-      const hideLinksTimer = setTimeout(() => setDisplayLinks(false), 1000);
-
-      return () => clearTimeout(hideLinksTimer);
-    }
-  }, [mousePosition]);
-
   return (
-    <Container
-      onMouseMove={(e) => !touchDevice && setMousePosition([e.clientX, e.clientY])}
-      onClick={onClick}
-      displayMouse={mouseOverLinks || displayLinks}
-    >
-      <VideoContainer>
-        <video ref={videoRef} loop style={videoStyle} controls={touchDevice}>
-          <source src={video} />
-        </video>
-      </VideoContainer>
-      <LinksContainer
-        displayit={mouseOverLinks || displayLinks}
-        onMouseEnter={() => setMouseOverLinks(true)}
-        onMouseLeave={() => setMouseOverLinks(false)}
-        onClick={(e) => e.stopPropagation()}
-      >
+    <Container>
+      <div>
+        <img src={cover} style={{ width: 400, maxWidth: '100vw' }} alt="Pochette de l’album ABCDAIRE" />
+        <Title>
+          vendredi 12 juillet
+        </Title>
+      </div>
+      <LinksContainer>
         <Link target="_blank" rel="noopener noreferer" title="Chaîne YouTube de Stroft" href="https://www.youtube.com/channel/UCX4ii_HniVkC-hDf7GtQabg">
           <FontAwesomeIcon icon={['fab', 'youtube']} />
         </Link>
